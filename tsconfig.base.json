@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@egghead/store/ui-shared": ["libs/store/ui-shared/src/index.ts"],
+      "@egghead/store/util-formatters": [
+        "libs/store/util-formatters/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
