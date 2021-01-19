@@ -89,3 +89,60 @@ import {Header} from '@egghead/store/ui-shared'
 ```bash
 yarn nx g @nrwl/workspace:lib util-formatters --directory=store
 ```
+
+## Generate a Lib for application by --appProject
+
+```bash
+ yarn nx g @nrwl/react:lib feature-game-detail --directory=store --appProject=store
+ ```
+
+ This will add some routing config into application
+
+ ## Add a backend server
+ 
+ ```bash
+ yarn add -D @nrwl/express
+ ```
+
+```bash
+yarn nx g @nrwl/express:application api --frontendProject=store
+```
+
+Added `--frontendProject` will also generate a `proxy.conf.json` file in `store` application.
+
+```bash
+yarn nx run api:serve
+```
+
+## Useful commands
+
+### Run Frontend and backend in one command
+
+```bash
+yarn nx run-many --target=serve --projects=api,store --parallel=true
+```
+
+### Modify `workspace.json` to run multi applications
+
+```json
+        "serve": {...},
+        "serveAppAndApi": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "nx run api:serve"
+              },
+              {
+                "command": "nx run store:serve"
+              }
+            ]
+          }
+        },
+```
+
+Run:
+
+```bash
+yarn nx run store:serveAppAndApi
+```
