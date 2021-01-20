@@ -146,3 +146,39 @@ Run:
 ```bash
 yarn nx run store:serveAppAndApi
 ```
+
+
+## Generate a lib which share between backend and frontend
+
+```bash
+yarn nx g @nrwl/workspace:lib util-interface --directory=api
+```
+
+It will generate under `libs/api/util-interface`.
+
+## Use storybook 
+
+```bash
+yarn add @nrwl/storybook -D
+yarn nx list @nrwl/react
+```
+
+You should be able to see `storybook-configuration`.
+
+```bash
+yarn nx generate @nrwl/react:stroybook-configruation store-ui-shared --configureCypress --generateStories
+```
+
+It will generate `Storybook` under `libs/ui-shared/.storybook` & `Cypress` under `store-ui-shared-e2e` folder
+
+### Run storybook
+
+```bash
+yarn nx run store-ui-shared:storybook
+```
+
+### Run Cypress
+
+```bash
+yarn nx run store-ui-shared-e2e:e2e --watch
+```

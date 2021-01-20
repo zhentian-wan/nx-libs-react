@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import {Game} from '@egghead/api/util-interfaces';
 import './app.scss';
 
 import { Header } from '@egghead/store/ui-shared';
@@ -19,7 +19,7 @@ import { StoreFeatureGameDetail } from '@egghead/store/feature-game-detail';
 export const App = () => {
   const history = useHistory();
   const [state, setState] = useState<{
-    data: any[];
+    data: Game[];
     loadingState: 'success' | 'error' | 'loading';
   }>({
     data: [],
@@ -50,7 +50,7 @@ export const App = () => {
 
   return (
     <>
-      <Header />
+      <Header title="Board game"/>
       <div className="container">
         <div className="games-layout">
           {state.loadingState === 'loading'

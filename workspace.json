@@ -66,7 +66,7 @@
           }
         },
         "serveAppAndApi": {
-          "builder": "@nrwl/workspace:run-commands",
+          "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
               {
@@ -147,6 +147,36 @@
           "options": {
             "jestConfig": "libs/store/ui-shared/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/store/ui-shared/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/store-ui-shared",
+            "config": {
+              "configFolder": "libs/store/ui-shared/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       }
@@ -256,6 +286,59 @@
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-util-interfaces": {
+      "root": "libs/api/util-interfaces",
+      "sourceRoot": "libs/api/util-interfaces/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/api/util-interfaces/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/api/util-interfaces"
+          ],
+          "options": {
+            "jestConfig": "libs/api/util-interfaces/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "store-ui-shared-e2e": {
+      "root": "apps/store-ui-shared-e2e",
+      "sourceRoot": "apps/store-ui-shared-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/store-ui-shared-e2e/cypress.json",
+            "tsConfig": "apps/store-ui-shared-e2e/tsconfig.e2e.json",
+            "devServerTarget": "store-ui-shared:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "store-ui-shared:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/store-ui-shared-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
