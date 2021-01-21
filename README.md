@@ -182,3 +182,73 @@ yarn nx run store-ui-shared:storybook
 ```bash
 yarn nx run store-ui-shared-e2e:e2e --watch
 ```
+
+
+### Run JEST
+
+```bash
+yarn nx run store:test
+```
+
+## Build application
+
+```bash
+yarn nx run store:build --configuration=production
+```
+
+or 
+
+```bash
+yarn nx build store --configuration=production
+```
+
+Will generate a `dist` folder
+
+## Lint application
+
+```bash
+yarn nx run store:lint
+```
+
+## Run the applications/libs which affected
+
+`Nx` use `git` history to detect which applications or libs have been changed.
+
+And then run the affected libs and applications to speed up testing.
+
+```bash
+yarn nx affected:test --base=master
+yarn nx affected:lint --base=master
+yarn nx affected:dep-graph --base=master
+```
+
+Run unit testings based on master branch.
+
+```bash
+yarn nx affected:test --all
+yarn nx affected:test --all --skip-nx-cache
+```
+
+`Nx` will cache the running `affected` result into `node_modules/.cache` to speed up next runtime.
+
+You can `--skip-nx-cache` or delete cache.
+
+## Migrations
+
+```bash
+yarn nx migrate latest
+```
+
+then install the new packages.
+
+```bash
+yarn
+```
+
+If there is `migrations.json` created:
+
+```bash
+yarn nx migrate --run-migrations=migrations.json
+```
+
+

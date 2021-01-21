@@ -51,7 +51,7 @@ export const App = () => {
   return (
     <>
       <Header title="Board game"/>
-      <div className="container">
+      <div className="container" data-testid="app-container">
         <div className="games-layout">
           {state.loadingState === 'loading'
             ? 'Loading...'
@@ -78,7 +78,7 @@ export const App = () => {
                         color="textSecondary"
                         component="p"
                       >
-                        {x.description}
+                        {x.desciption}
                       </Typography>
                       <Typography
                         variant="body2"
